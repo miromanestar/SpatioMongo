@@ -9,12 +9,7 @@ PORT = '27017'
 
 CONNECTION_STRING = f'mongodb://{ USERNAME }:{ PASSWORD }@{ SERVER }:{ PORT }'
 
-if __name__ == '__main__':
-
-    client = MongoClient(CONNECTION_STRING)
-    db = client['UserDB']
-    collection = db['Arrests']
-
+def query1(collection):
     query = {'location': SON([('$nearSphere', [-85.307296, 35.058225]), ('$maxDistance', 3)])}
     result = collection.find(query).limit(5)
 
@@ -26,3 +21,14 @@ if __name__ == '__main__':
         print(f'{doc["charges"]}')
         print(f'{doc["address_number"]} {doc["street_name"]}')
         print('')
+
+if __name__ == '__main__':
+
+    client = MongoClient(CONNECTION_STRING)
+    db = client['UserDB']
+    collection = db['Arrests']
+
+    query = {'location': SON([('$nearSphere', [-85.307296, 35.058225]), ('$maxDistance', 3)])}
+    result = collection.find(query).limit(5)
+
+    query1(collection)
