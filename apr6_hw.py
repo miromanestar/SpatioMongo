@@ -8,6 +8,7 @@ PORT = '27017'
 
 CONNECTION_STRING = f'mongodb://{ USERNAME }:{ PASSWORD }@{ SERVER }:{ PORT }'
 
+DATE_FORMAT = '%Y-%m-%dT%H:%M:%S%z'
 WALNUT_BRIDGE_COORDS = {
     'type': 'Point',
     'coordinates': [-85.307296, 35.058225]
@@ -37,8 +38,8 @@ def query1(collection):
     print_output(result)
 
 def query2(collection):
-    from_date = datetime.strptime('2022-04-04T00:00:00-0500', '%Y-%m-%dT%H:%M:%S%z')
-    to_date = datetime.strptime('2022-04-4T23:59:59-0500', '%Y-%m-%dT%H:%M:%S%z')
+    from_date = datetime.strptime('2022-04-04T00:00:00-0500', DATE_FORMAT)
+    to_date = datetime.strptime('2022-04-4T23:59:59-0500', DATE_FORMAT)
 
     query = {
         'arrest_date': {
@@ -52,8 +53,8 @@ def query2(collection):
     print_output(result)
 
 def query3(collection):
-    from_date = datetime.strptime('2022-01-01T00:00:00-0500', '%Y-%m-%dT%H:%M:%S%z')
-    to_date = datetime.strptime('2022-01-5T23:59:59-0500', '%Y-%m-%dT%H:%M:%S%z')
+    from_date = datetime.strptime('2022-01-01T00:00:00-0500', DATE_FORMAT)
+    to_date = datetime.strptime('2022-01-5T23:59:59-0500', DATE_FORMAT)
 
     query = {
         'location': {
