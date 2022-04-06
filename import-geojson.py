@@ -1,6 +1,7 @@
 import argparse, json
 from pymongo import MongoClient, InsertOne, GEOSPHERE
 from pymongo.errors import BulkWriteError
+from datetime import datetime
 
 parser = argparse.ArgumentParser(description='Bulk import GeoJSON file into MongoDB')
 parser.add_argument('-f', required=True, help='input file')
@@ -41,6 +42,7 @@ def upload_data(collection, data):
     bulk = []
     for feature in data:
         item = feature['properties']
+        item['arrest_date'] = datetime.strptime(f"{ item['arrest_date'] }-0500", '%Y-%m-%dT%H:%M:%S.000%z')
         item['location'] = feature['geometry']
         bulk.append(InsertOne(item))
 
