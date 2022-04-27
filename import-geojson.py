@@ -24,7 +24,7 @@ COLLECTION_NAME = args.c
 SERVER = args.s
 PORT = args.port
 
-CONNECTION_STRING = f'mongodb://{ USERNAME }:{ PASSWORD }@{ SERVER }:{ PORT }'
+CONNECTION_STRING = f'mongodb://{ SERVER }:{ PORT }'
 
 def get_database():
     client = MongoClient(CONNECTION_STRING)
